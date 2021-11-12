@@ -3,7 +3,6 @@ package main
 import (
 	"flag"
 	"github.com/Amosawy/Raft_Example/node"
-	"log"
 	"strings"
 )
 
@@ -18,7 +17,6 @@ func main()  {
 	id := flag.Int("id",1,"node Id")
 
 	flag.Parse()
-	log.Print(*port," ",*cluster)
 	clusters := strings.Split(*cluster,",")
 	ns := make(map[int]*node.Node)
 	for k,v := range clusters {

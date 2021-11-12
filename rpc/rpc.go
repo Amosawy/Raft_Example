@@ -24,9 +24,28 @@ type HeartbeatArgs struct {
 	Term int
 	//当前leader Id
 	LeaderId int
+	// 新日志之前的索引
+	PrevLogIndex int
+	// PrevLogIndex 的任期号
+	PrevLogTerm int
+	// 准备存储的日志条目（表示心跳时为空）
+	Entries []LogEntry
+	// Leader 已经commit的索引值
+	LeaderCommit int
 }
 
 type HeartbeatReply struct {
-	// 当前 follower term
-	Term int
+	Term    int
+	Success bool
+	// 如果 Follower Index小于 Leader Index， 会告诉 Leader 下次开始发送的索引位置
+	NextIndex int
+}
+
+type LogEntry struct {
+	//当前Term
+	LogTerm int
+	//当前index
+	LogIndex int
+	//用户command
+	LogCMD interface{}
 }
